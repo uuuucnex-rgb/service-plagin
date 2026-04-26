@@ -122,32 +122,46 @@
     }
     .hero-visual {
       aspect-ratio: 4/5; border-radius: 28px; overflow: hidden; position: relative;
-      background: linear-gradient(135deg, #d7c4a9 0%, #a68858 60%, #7a6038 100%);
+      background:
+        linear-gradient(135deg, #d7c4a9 0%, #a68858 60%, #7a6038 100%);
       box-shadow: 0 50px 100px -20px rgba(26,20,16,0.25),
                   0 30px 60px -30px rgba(26,20,16,0.15);
     }
+    .hero-visual img.bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
     .hero-visual::before {
       content: ""; position: absolute; inset: 0;
+      z-index: 1;
       background:
-        radial-gradient(circle at 25% 20%, rgba(255,255,255,0.3), transparent 50%),
-        radial-gradient(circle at 75% 80%, rgba(26,20,16,0.2), transparent 55%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
+        linear-gradient(180deg,
+          rgba(26,20,16,0.55) 0%,
+          rgba(26,20,16,0.15) 30%,
+          rgba(26,20,16,0.15) 65%,
+          rgba(26,20,16,0.75) 100%);
     }
     .hero-visual-overlay {
       position: absolute; inset: 0;
+      z-index: 2;
       display: flex; flex-direction: column; justify-content: space-between;
       padding: 28px;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255,255,255,0.98);
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
     }
     .hv-top {
       display: flex; justify-content: space-between; align-items: flex-start;
       font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
     }
     .hv-tag {
-      padding: 6px 12px; background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(10px); border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.3);
+      padding: 6px 12px; background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.98);
+      text-shadow: none;
     }
     .hv-bottom {
       font-family: 'Nunito', sans-serif; font-weight: 800;
@@ -219,7 +233,7 @@
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
       position: relative;
     }
-    .how-step { position: relative; }
+    .how-step { position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; }
     .step-icon {
       width: 64px; height: 64px; border-radius: 18px;
       background: var(--ink); color: var(--accent);
@@ -521,25 +535,38 @@
 
     .usp-visual {
       aspect-ratio: 1; border-radius: 28px;
-      background:
-        radial-gradient(circle at 70% 30%, var(--accent) 0%, transparent 50%),
-        linear-gradient(135deg, #2a1f18, #1a1410);
+      background: linear-gradient(135deg, #2a1f18, #1a1410);
       position: relative; overflow: hidden;
       border: 1px solid rgba(201,169,110,0.2);
       box-shadow: 0 40px 80px -20px rgba(26,20,16,0.25);
     }
+    .usp-visual img.bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
     .usp-visual::before {
-      content: "✦"; position: absolute; inset: 0;
-      display: grid; place-items: center;
-      font-size: 240px; color: rgba(201,169,110,0.18);
-      animation: rotate 24s linear infinite;
+      content: ""; position: absolute; inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg,
+          rgba(14,10,7,0.7) 0%,
+          rgba(14,10,7,0.25) 35%,
+          rgba(14,10,7,0.25) 60%,
+          rgba(14,10,7,0.85) 100%);
     }
     @keyframes rotate { to { transform: rotate(360deg); } }
     .usp-visual-content {
-      position: relative; z-index: 1; padding: 48px;
+      position: relative; z-index: 2; padding: 48px;
       height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.6);
     }
-    .usp-vc-top { color: var(--accent); font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; }
+    .usp-vc-top {
+      color: var(--accent);
+      font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 12px rgba(0,0,0,0.5);
+    }
     .usp-vc-bottom {
       font-family: 'Nunito', sans-serif; color: #fff;
       font-weight: 800; font-size: 36px; line-height: 1.1; letter-spacing: -1px;
@@ -596,6 +623,47 @@
       transition: opacity 0.2s;
     }
     .case-link:hover { opacity: 0.7; }
+
+    /* ─── INTERNAL USE ─── */
+    .internal { padding: 120px 48px; background: var(--bg); }
+    .internal-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .role-card {
+      background: var(--bg-card); padding: 36px 32px;
+      border-radius: 22px; border: 1px solid var(--line);
+      transition: all 0.3s;
+      display: flex; gap: 22px; align-items: flex-start;
+    }
+    .role-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px -20px rgba(26,20,16,0.1);
+    }
+    .role-icon {
+      flex-shrink: 0;
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--ink); color: var(--accent);
+      display: grid; place-items: center;
+      font-size: 24px;
+    }
+    .role-content { flex: 1; }
+    .role-tag {
+      display: inline-block; padding: 4px 11px;
+      background: rgba(201,169,110,0.12); color: var(--accent-deep);
+      border-radius: 100px; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .role-card h3 {
+      font-family: 'Nunito', sans-serif; font-weight: 800;
+      font-size: 22px; margin-bottom: 10px;
+      letter-spacing: -0.5px; line-height: 1.2;
+    }
+    .role-card p {
+      font-size: 14px; color: var(--muted); line-height: 1.65;
+    }
+    .role-card p strong { color: var(--ink); font-weight: 600; }
 
     /* ─── COMPARISON ─── */
     .compare { padding: 120px 48px; }
@@ -774,11 +842,13 @@
       .calc-wrap { padding: 40px 28px; }
       .usp-grid { grid-template-columns: 1fr; gap: 50px; }
       .cases-grid { grid-template-columns: 1fr; }
+      .internal-grid { grid-template-columns: 1fr; }
+      .role-card { padding: 28px 22px; }
       .conv-wrap { padding: 50px 32px; }
       .conv-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
       .pricing-wrap { padding: 44px 28px; }
-      .problem, .how, .dashboard, .calc, .usp, .cases, .compare, .conv, .pricing, .contact { padding: 70px 24px; }
+      .problem, .how, .dashboard, .calc, .usp, .cases, .internal, .compare, .conv, .pricing, .contact { padding: 70px 24px; }
     }
   </style>
 </head>
@@ -808,25 +878,26 @@
         на <em>своём</em> объекте
       </h1>
       <p class="hero-lede">
-        Плагин для сайта, который превращает посетителя в горячего лида за 60 секунд. Фотография комнаты или фасада → выбор материала из вашего каталога → готовый рендер.
+        Плагин для сайта, который превращает посетителя в горячего лида за 60 секунд. И инструмент рендера для команды — отдел продаж, проектировщики, руководители.
       </p>
       <div class="hero-spacer"></div>
       <div class="hero-stats">
+        <div>
+          <div class="stat-num">+<em>180%</em></div>
+          <div class="stat-label">К конверсии в заявку</div>
+        </div>
         <div>
           <div class="stat-num"><em>60</em>с</div>
           <div class="stat-label">На генерацию рендера</div>
         </div>
         <div>
-          <div class="stat-num"><em>3-7</em></div>
-          <div class="stat-label">Дней до запуска под ключ</div>
-        </div>
-        <div>
-          <div class="stat-num"><em>2</em>стр.</div>
-          <div class="stat-label">Кода для встраивания</div>
+          <div class="stat-num"><em>3</em>дня</div>
+          <div class="stat-label">До запуска на сайте</div>
         </div>
       </div>
     </div>
     <div class="hero-visual">
+      <img class="bg-img" src="https://raw.githubusercontent.com/uuuucnex-rgb/casteliaCATALOG/refs/heads/main/IMG_4311.PNG" alt="Демонстрация плагина" />
       <div class="hero-visual-overlay">
         <div class="hv-top">
           <div class="hv-tag">live demo</div>
@@ -859,9 +930,9 @@
         <p>Сотрудники тратят часы на консультации тех, кто ещё не определился. Большая часть времени уходит на лидов, которые не купят.</p>
       </div>
       <div class="problem-card">
-        <div class="problem-num">40%</div>
-        <h3>Возвраты после доставки</h3>
-        <p>Не подошёл цвет, не вписался в интерьер, не такой, как ожидал. Клиент злится, бренд теряет деньги и репутацию.</p>
+        <div class="problem-num">~80к</div>
+        <h3>На один рендер проектировщику</h3>
+        <p>Каждый ручной рендер — это часы работы дизайнера или 3D-визуализатора. Плагин выдаёт фотореалистичный результат за 60 секунд и снимает с команды рутину — экономия от 200&nbsp;000 ₽ в месяц.</p>
       </div>
     </div>
   </section>
@@ -924,7 +995,7 @@
         </div>
         <div class="dash-stat">
           <div class="dash-stat-label">Материалов в каталоге</div>
-          <div class="dash-stat-value" data-target="100" data-suffix="+">0</div>
+          <div class="dash-stat-value" data-target="50" data-suffix="+">0</div>
           <div class="dash-stat-trend">↗ без ограничений</div>
         </div>
         <div class="dash-stat">
@@ -946,17 +1017,17 @@
           </ul>
         </div>
         <div class="dash-chart">
-          <div class="dash-chart-title">Куда идут заявки</div>
+          <div class="dash-chart-title">Работает на всех платформах</div>
           <div class="donut-wrap">
             <div class="donut">
-              <div class="donut-value">3</div>
+              <div class="donut-value">∞</div>
             </div>
-            <div class="donut-label">Канала на выбор</div>
+            <div class="donut-label">Любой сайт, любой CMS</div>
           </div>
           <ul class="dash-mini-list">
-            <li>Telegram менеджеру</li>
-            <li>На почту отдела продаж</li>
-            <li>Прямо в вашу CRM</li>
+            <li>WordPress, Tilda, Bitrix</li>
+            <li>Shopify, OpenCart, Insales</li>
+            <li>Любой кастомный сайт</li>
           </ul>
         </div>
       </div>
@@ -1059,6 +1130,7 @@
         </ul>
       </div>
       <div class="usp-visual">
+        <img class="bg-img" src="https://raw.githubusercontent.com/uuuucnex-rgb/casteliaCATALOG/refs/heads/main/IMG_4313.PNG" alt="Уникальный формат" />
         <div class="usp-visual-content">
           <div class="usp-vc-top">Уникальный формат</div>
           <div class="usp-vc-bottom">
@@ -1106,8 +1178,8 @@
       </div>
       <div class="case-card">
         <div class="case-tag">Услуга</div>
-        <h3>Подбор ремонта</h3>
-        <p class="case-niche">Дизайн квартиры по фото клиента</p>
+        <h3>RemontPro</h3>
+        <p class="case-niche">Подбор дизайна квартиры по фото клиента</p>
         <div class="case-divider"></div>
         <ul class="case-feature-list">
           <li>Клиент фотографирует комнату прямо с телефона</li>
@@ -1115,6 +1187,49 @@
           <li>Готовый вариант дизайна за 60 секунд</li>
           <li>Лид сразу попадает в работу к менеджеру</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── INTERNAL USE ─── -->
+  <section class="internal">
+    <div class="section-head">
+      <div class="section-eyebrow">Не только для клиентов</div>
+      <h2>Сильный инструмент <em>внутри</em> компании</h2>
+      <p>Плагин одинаково полезен снаружи и внутри. По нашим кейсам с Telegram-ботами больше половины генераций делают сами сотрудники компании-клиента — отделы продаж, проектировщики и руководители. Это меняет скорость работы целых департаментов.</p>
+    </div>
+    <div class="internal-grid">
+      <div class="role-card">
+        <div class="role-icon">📞</div>
+        <div class="role-content">
+          <div class="role-tag">Отдел продаж</div>
+          <h3>Менеджер закрывает сделку быстрее</h3>
+          <p>Клиент сомневается? Менеджер прямо во время звонка делает рендер его комнаты с нужным материалом и присылает в WhatsApp. Сделка закрывается на эмоции, а не на «я подумаю». <strong>Конверсия в оплату растёт в разы.</strong></p>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📐</div>
+        <div class="role-content">
+          <div class="role-tag">Проектировщики и дизайнеры</div>
+          <h3>Один рендер вместо нескольких часов работы</h3>
+          <p>Раньше — открыть 3D-софт, поставить камеру, рендерить полчаса. Теперь — фото объекта, материал, 60 секунд и готово. <strong>Экономия от 200&nbsp;000 ₽ в месяц</strong> на ручной визуализации проектов и ускорение защиты концепций перед клиентом.</p>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👔</div>
+        <div class="role-content">
+          <div class="role-tag">Руководители и собственники</div>
+          <h3>Демонстрация на переговорах</h3>
+          <p>Встреча с крупным клиентом, архитектором или подрядчиком. Вместо распечатанных каталогов — телефон, фото объекта заказчика и живая визуализация прямо за столом переговоров. <strong>Эффект «вау»</strong>, который запоминается надолго.</p>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📦</div>
+        <div class="role-content">
+          <div class="role-tag">Маркетинг и контент</div>
+          <h3>Контент для соцсетей и сайта</h3>
+          <p>Маркетологу нужны фото для Reels, постов в Instagram, обложек статей в блоге, баннеров на сайт. <strong>Любое количество вариаций материалов на любых интерьерах</strong> — без фотосессий, моделей и услуг визуализаторов.</p>
+        </div>
       </div>
     </div>
   </section>
